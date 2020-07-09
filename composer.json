@@ -1,0 +1,52 @@
+{
+    "name": "suilven/silverstripe-link-cache",
+    "type": "silverstripe-vendormodule",
+    "description": "A More Efficient Link()",
+    "keywords": [
+        "SilverStripe",
+        "links",
+        "cache"
+    ],
+    "homepage": "https://github.com/suilven/silverstripe-manticore-search",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gordon Anderson",
+            "email": "gordon.b.anderson@gmail.com",
+            "homepage": "https://github.com/gordonbanderson",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "~7",
+        "silverstripe/cms": "^4",
+        "suilven/freetextsearch": "dev-master"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2.5"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Suilven\\SilverStripeLinkCache\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Suilven\\ManticoreSearch\\Tests\\": "tests"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "checkCode": "composer checkcs && composer lint && composer phpstan",
+        "checkcs": "vendor/bin/phpcs --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests",
+        "fixcs": "vendor/bin/phpcbf --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests",
+        "lint": "vendor/bin/parallel-lint src/ tests/",
+        "phpstan": "vendor/bin/phpstan analyse --level=6 -c tests/phpstan.neon src/"
+    }
+}
