@@ -9,28 +9,20 @@
 
 namespace Suilven\SilverStripeLinkCache\Task;
 
-use League\CLImate\CLImate;
 use Psr\SimpleCache\CacheInterface;
 use SilverStripe\CMS\Model\SiteTree;
-use SilverStripe\Control\Director;
 use SilverStripe\Core\Injector\Injector;
-use SilverStripe\Dev\BuildTask;
 use SilverStripe\ORM\DataObject;
-use SilverStripe\Security\Permission;
-use SilverStripe\Security\Security;
-use SilverStripe\SiteConfig\SiteConfig;
-use Suilven\FreeTextSearch\Factory\BulkIndexerFactory;
-use Suilven\FreeTextSearch\Helper\BulkIndexingHelper;
-use Suilven\FreeTextSearch\Indexes;
 
-class LinkCacheBuilder {
-    public function rebuildCache()
+class LinkCacheBuilder
+{
+    public function rebuildCache(): void
     {
         // create handles to cache objects
-        /** @var CacheInterface $linksCache */
+        /** @var \Psr\SimpleCache\CacheInterface $linksCache */
         $linksCache = Injector::inst()->get(CacheInterface::class . '.links-cache-link');
 
-        /** @var CacheInterface $linksDepthCache */
+        /** @var \Psr\SimpleCache\CacheInterface $linksDepthCache */
         $linksDepthCache = Injector::inst()->get(CacheInterface::class . '.links-cache-depth');
 
         // clear existing caches
@@ -38,6 +30,6 @@ class LinkCacheBuilder {
         $linksDepthCache->clear();
 
         $root = DataObject::get_by_id(SiteTree::class, 1);
-        error_log($root->Title);
+        \error_log($root->Title);
     }
 }

@@ -9,16 +9,7 @@
 
 namespace Suilven\SilverStripeLinkCache\Task;
 
-use League\CLImate\CLImate;
-use SilverStripe\CMS\Model\SiteTree;
-use SilverStripe\Control\Director;
 use SilverStripe\Dev\BuildTask;
-use SilverStripe\Security\Permission;
-use SilverStripe\Security\Security;
-use SilverStripe\SiteConfig\SiteConfig;
-use Suilven\FreeTextSearch\Factory\BulkIndexerFactory;
-use Suilven\FreeTextSearch\Helper\BulkIndexingHelper;
-use Suilven\FreeTextSearch\Indexes;
 
 class RebuildLinkCacheTask extends BuildTask
 {
