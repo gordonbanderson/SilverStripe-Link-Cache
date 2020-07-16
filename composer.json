@@ -1,5 +1,5 @@
 {
-    "name": "suilven\/silverstripe-link-cache",
+    "name": "suilven/silverstripe-link-cache",
     "type": "silverstripe-vendormodule",
     "description": "A More Efficient Link()",
     "keywords": [
@@ -7,30 +7,29 @@
         "links",
         "cache"
     ],
-    "homepage": "https:\/\/github.com\/suilven\/silverstripe-manticore-search",
+    "homepage": "https://github.com/suilven/silverstripe-manticore-search",
     "license": "MIT",
     "authors": [
         {
             "name": "Gordon Anderson",
             "email": "gordon.b.anderson@gmail.com",
-            "homepage": "https:\/\/github.com\/gordonbanderson",
+            "homepage": "https://github.com/gordonbanderson",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "~7",
-        "silverstripe\/cms": "~4",
-        "silverstripe\/recipe-cms": "4.x-dev"
+        "silverstripe/cms": "~4",
+        "silverstripe/recipe-cms": "4.x-dev"
     },
     "require-dev": {
-        "php-parallel-lint\/php-console-highlighter": "^0.5.0",
-        "php-parallel-lint\/php-parallel-lint": "^1.2",
-        "phpstan\/extension-installer": "^1.0",
-        "phpstan\/phpstan-strict-rules": "^0.12.3",
-        "slevomat\/coding-standard": "^6.3",
-        "suilven\/php-travis-enhancer": "^1.0",
-        "suilven\/random-english": "^1.0",
-        "vimeo\/psalm": "^3.12"
+        "php-parallel-lint/php-console-highlighter": "^0.5.0",
+        "php-parallel-lint/php-parallel-lint": "^1.2",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan-strict-rules": "^0.12.3",
+        "slevomat/coding-standard": "^6.3",
+        "suilven/random-english": "^1.0",
+        "vimeo/psalm": "^3.12"
     },
     "config": {
         "sort-packages": true
@@ -48,11 +47,11 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "checkcs": "vendor\/bin\/phpcs --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests",
-        "fixcs": "vendor\/bin\/phpcbf --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests",
+        "checkcs": "vendor/bin/phpcs --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests",
+        "fixcs": "vendor/bin/phpcbf --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests",
         "checkCode": "composer checkcs && composer lint && composer phpstan && composer psalm",
-        "lint": "vendor\/bin\/parallel-lint src\/ tests\/",
-        "phpstan": "vendor\/bin\/phpstan analyse --level=6 -c tests\/phpstan.neon src\/",
-        "psalm": "vendor\/bin\/psalm --show-info=true"
+        "lint": "vendor/bin/parallel-lint src/ tests/",
+        "phpstan": "vendor/bin/phpstan analyse --level=6 -c tests/phpstan.neon src/",
+        "psalm": "vendor/bin/psalm --show-info=true"
     }
 }
