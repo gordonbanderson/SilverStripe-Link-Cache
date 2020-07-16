@@ -10,10 +10,14 @@ services:
    volumes:
     - .:/var/www
 
+# Not be used in prod,, highly insecure passwords!
+ database:
+   image: 'mariadb/server:10.4'
+   environment:
+     - MARIADB_DATABASE=default
+     - MARIADB_USER=docker
+     - MARIADB_PASSWORD=docker
+     - MARIADB_PORT=3306
+     - MARIADB_ROOT_PASSWORD=root
 
- manticoresearch-manticore:
-   image: manticoresearch/manticore
-   expose:
-    - 9306
-    - 9312
 
