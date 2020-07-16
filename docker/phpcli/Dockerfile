@@ -3,7 +3,8 @@ FROM php:7.4-cli-buster
 RUN apt -y update && apt -y upgrade
 RUN apt search icu-cu
 RUN apt -y install figlet git zip unzip libicu-dev
-RUN docker-php-ext-configure intl \
+RUN docker-php-ext-install pdo_mysql \
+    && docker-php-ext-configure intl \
     && docker-php-ext-install intl
 
 RUN apt-get -y autoremove && apt-get -y clean
