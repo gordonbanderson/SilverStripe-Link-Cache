@@ -1,0 +1,6 @@
+---
+Name: link-path-extension
+---
+SilverStripe\CMS\Model\SiteTree:
+  extensions:
+    - Suilven\SilverStripeLinkCache\Extension\LinkPathExtension
