@@ -1,0 +1,15 @@
+---
+Name: links-cache
+---
+#Initial cache simply called app
+SilverStripe\Core\Injector\Injector:
+  Psr\SimpleCache\CacheInterface.links-cache-link:
+    factory: SilverStripe\Core\Cache\CacheFactory
+    constructor:
+      namespace: "links-cache-link"
+
+
+  Psr\SimpleCache\CacheInterface.links-cache-depth:
+    factory: SilverStripe\Core\Cache\CacheFactory
+    constructor:
+      namespace: "links-cache-depth"
