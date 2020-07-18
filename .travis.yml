@@ -22,6 +22,9 @@ matrix:
             env: 'INSTALLER_VERSION=4.5.x-dev PHPUNIT_TEST=1'
         -
             php: 7.4
+            env: 'INSTALLER_VERSION=4.5.x-dev PHPUNIT_TEST=1 DB=PGSQL'
+        -
+            php: 7.4
             env: 'INSTALLER_VERSION=4.5 DUPLICATE_CODE_CHECK=1'
         -
             php: 7.4
@@ -50,6 +53,7 @@ install:
     - 'composer validate'
     - 'composer global require hirak/prestissimo'
     - 'composer require --no-update silverstripe/recipe-cms:$INSTALLER_VERSION'
+    - 'if [[ $DB == PGSQL ]]; then composer require --no-update silverstripe/postgresql:2.3.x-dev; fi'
     - 'composer install --prefer-source --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile'
     - 'export UNIT_TESTING_CONFIG_ENABLED=1'
 before_script:
