@@ -11,6 +11,13 @@ namespace Suilven\SilverStripeLinkCache\Task;
 
 use SilverStripe\Dev\BuildTask;
 
+/**
+ * Class RebuildLinkCacheTask
+ *
+ * @package Suilven\SilverStripeLinkCache\Task
+ *
+ * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
+ */
 class RebuildLinkCacheTask extends BuildTask
 {
 

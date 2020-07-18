@@ -4,13 +4,25 @@ namespace Suilven\SilverStripeLinkCache\Extension;
 
 use SilverStripe\ORM\DataExtension;
 
+/**
+ * Class LinkPathExtension
+ *
+ * @package Suilven\SilverStripeLinkCache\Extension
+ *
+ * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+ * @property string $LinkPath
+ * @property int $LinkDepth
+ * @property \SilverStripe\CMS\Model\SiteTree $owner
+ */
 class LinkPathExtension extends DataExtension
 {
+    /** @var array<string,string> */
     private static $db = [
         'LinkPath' => 'Text',
         'LinkDepth' => 'Int',
     ];
 
+    /** @var array<string,array<string>> */
     private static $indexes = [
         'LinkPathIndex' => ['LinkPath'],
     ];
@@ -22,7 +34,7 @@ class LinkPathExtension extends DataExtension
         // @todo Make this more efficient
         $link = $this->owner->Link();
 
-        if (\is_null($link)) {
+        if ($link === '') {
             return;
         }
 
@@ -31,20 +43,20 @@ class LinkPathExtension extends DataExtension
         \array_pop($splits);
         \array_pop($splits);
         $path = \implode('/', $splits);
-        $this->owner->LinkPath = $path . '/';
-        $this->owner->LinkDepth = \sizeof($splits) - 1;
+        $this->getOwner()->LinkPath = $path . '/';
+        $this->getOwner()->LinkDepth = \sizeof($splits) - 1;
     }
 
 
     /** @return string the link */
     public function calculateLink(): string
     {
-        $parentPath = $this->owner->LinkPath;
+        $parentPath = $this->getOwner()->LinkPath;
         // exit condition
-        if (!\is_null($this->owner->ParentID)) {
-            if (empty($this->owner->LinkPath)) {
-                $parentPath = $this->owner->Parent()->calculateLink() . '/' . $this->owner->URLSegment;
-                $this->owner->LinkPath = $parentPath;
+        if ($this->owner->ParentID !== 0) {
+            if (\is_null($this->getOwner()->LinkPath) || $this->getOwner()->LinkPath === '') {
+                $parentPath = $this->getOwner()->Parent()->calculateLink() . '/' . $this->getOwner()->URLSegment;
+                $this->getOwner()->LinkPath = $parentPath;
             }
         }
 
@@ -55,6 +67,6 @@ class LinkPathExtension extends DataExtension
     /** @return string the link to this page without database traversal */
     public function CachedLink(): string
     {
-        return $this->owner->LinkPath . $this->owner->URLSegment . '/';
+        return $this->getOwner()->LinkPath . $this->getOwner()->URLSegment . '/';
     }
 }

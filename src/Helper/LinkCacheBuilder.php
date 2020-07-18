@@ -29,7 +29,12 @@ class LinkCacheBuilder
             $parent = DataObject::get_by_id(SiteTree::class, $pageID);
             $children = SiteTree::get()->filter(['ParentID' => $pageID]);
             foreach ($children as $child) {
-                $child->LinkPath = !is_null($parent) ? $parent->LinkPath . $child->URLSegment . '/' : '/' . $child->URLSegment . '/';
+                $child->LinkPath = $pageID !== 0
+                ?
+                /* @phpstan-ignore-next-line */
+                    $parent->LinkPath . $child->URLSegment . '/'
+                    : '/' . $child->URLSegment . '/';
+
                 $splits = \explode('/', $child->LinkPath);
                 $child->LinkDepth = \sizeof($splits);
                 $child->write();
@@ -38,7 +43,5 @@ class LinkCacheBuilder
 
             $this->rebuildCacheForChildrenOfPages($childIDs);
         }
-
-
     }
 }
