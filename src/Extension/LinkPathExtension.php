@@ -19,22 +19,26 @@ class LinkPathExtension extends DataExtension
     {
         parent::onBeforeWrite();
 
-        $link = $this->calculateLink();
+        $link = $this->owner->Link();
 
         if (\is_null($link)) {
             return;
         }
 
         $splits = \explode('/', $link);
+        error_log('PRE POP:' . print_r($splits, true));
+
         \array_pop($splits);
+        \array_pop($splits);
+        error_log('POST POP:' . print_r($splits, true));
         $path = \implode('/', $splits);
-        $this->owner->LinkPath = $path;
+        $this->owner->LinkPath = $path . '/';
     }
 
 
     public function calculateLink()
     {
-        \error_log('CALCULATING PARENT PATH FOR [' . $this->owner->ID . ']' . $this->owner->Link());
+      //  \error_log('CALCULATING PARENT PATH FOR [' . $this->owner->ID . ']' . $this->owner->Link());
         $parentPath = $this->owner->LinkPath;
         // exit condition
         if (!\is_null($this->owner->ParentID)) {
