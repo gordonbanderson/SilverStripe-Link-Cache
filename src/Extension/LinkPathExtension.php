@@ -26,11 +26,9 @@ class LinkPathExtension extends DataExtension
         }
 
         $splits = \explode('/', $link);
-        error_log('PRE POP:' . print_r($splits, true));
 
         \array_pop($splits);
         \array_pop($splits);
-        error_log('POST POP:' . print_r($splits, true));
         $path = \implode('/', $splits);
         $this->owner->LinkPath = $path . '/';
     }
@@ -49,10 +47,15 @@ class LinkPathExtension extends DataExtension
                 $this->owner->LinkPath = $parentPath;
                // error_log('LINK PATH: ' . $this->owner->LinkPath);
             }
-        } else {
-            \error_log('-------------');
         }
 
         return $parentPath;
+    }
+
+
+    /** @return string the link to this page without database traversal */
+    public function CachedLink(): string
+    {
+        return $this->owner->LinkPath . $this->owner->URLSegment . '/';
     }
 }

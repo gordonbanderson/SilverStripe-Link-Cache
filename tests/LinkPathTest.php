@@ -12,15 +12,13 @@ class LinkPathTest extends SapphireTest
     public function testArbitraryPages(): void
     {
         \error_log('================');
-        $ids = [80];
+        $ids = [80, 9, 2, 1];
         foreach ($ids as $pageID) {
             $page = $this->objFromFixture(SiteTree::class, 'sitetree' . $pageID);
-            \error_log('LINK: ' . $page->Link());
-            $link = $page->Parent()->Link();
-            \error_log('PARENT LINK: ' . $link);
-            \error_log('LINK PATH: ' . $page->LinkPath);
+            $parentLink = $page->Parent()->Link();
 
-            $this->assertEquals($link, $page->LinkPath);
+            $this->assertEquals($parentLink, $page->LinkPath);
+            $this->assertEquals($page->Link(), $page->CachedLink());
         }
     }
 }
