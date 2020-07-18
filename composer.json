@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "php": "~7",
+        "php": "~7.1",
         "silverstripe/cms": "~4",
         "silverstripe/recipe-cms": "4.x-dev"
     },
@@ -28,8 +28,7 @@
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan-strict-rules": "^0.12.3",
         "slevomat/coding-standard": "^6.3",
-        "suilven/random-english": "^1.0",
-        "vimeo/psalm": "^3.12"
+        "phpunit/phpunit": "^5.7"
     },
     "config": {
         "sort-packages": true
@@ -51,7 +50,6 @@
         "fixcs": "vendor/bin/phpcbf --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests",
         "checkCode": "composer checkcs && composer lint && composer phpstan && composer psalm",
         "lint": "vendor/bin/parallel-lint src/ tests/",
-        "phpstan": "vendor/bin/phpstan analyse --level=6 -c tests/phpstan.neon src/",
-        "psalm": "vendor/bin/psalm --show-info=true"
+        "phpstan": "vendor/bin/phpstan analyse --level=6 -c tests/phpstan.neon src/"
     }
 }
