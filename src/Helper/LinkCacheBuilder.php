@@ -9,27 +9,36 @@
 
 namespace Suilven\SilverStripeLinkCache\Task;
 
-use Psr\SimpleCache\CacheInterface;
 use SilverStripe\CMS\Model\SiteTree;
-use SilverStripe\Core\Injector\Injector;
 use SilverStripe\ORM\DataObject;
 
 class LinkCacheBuilder
 {
     public function rebuildCache(): void
     {
-        // create handles to cache objects
-        /** @var \Psr\SimpleCache\CacheInterface $linksCache */
-        $linksCache = Injector::inst()->get(CacheInterface::class . '.links-cache-link');
+        // @todo Stage
+        $this->rebuildCacheForChildrenOfPages([0]);
+    }
 
-        /** @var \Psr\SimpleCache\CacheInterface $linksDepthCache */
-        $linksDepthCache = Injector::inst()->get(CacheInterface::class . '.links-cache-depth');
 
-        // clear existing caches
-        $linksCache->clear();
-        $linksDepthCache->clear();
+    /** @param array<int> $pageIDs */
+    private function rebuildCacheForChildrenOfPages(array $pageIDs): void
+    {
+        $childIDs = [];
+        foreach ($pageIDs as $pageID) {
+            $parent = DataObject::get_by_id(SiteTree::class, $pageID);
+            $children = SiteTree::get()->filter(['ParentID' => $pageID]);
+            foreach ($children as $child) {
+                $child->LinkPath = !is_null($parent) ? $parent->LinkPath . $child->URLSegment . '/' : '/' . $child->URLSegment . '/';
+                $splits = \explode('/', $child->LinkPath);
+                $child->LinkDepth = \sizeof($splits);
+                $child->write();
+                $childIDs[] = $child->ID;
+            }
 
-        $root = DataObject::get_by_id(SiteTree::class, 1);
-        \error_log($root->Title);
+            $this->rebuildCacheForChildrenOfPages($childIDs);
+        }
+
+
     }
 }

@@ -19,6 +19,7 @@ class LinkPathExtension extends DataExtension
     {
         parent::onBeforeWrite();
 
+        // @todo Make this more efficient
         $link = $this->owner->Link();
 
         if (\is_null($link)) {
@@ -35,18 +36,15 @@ class LinkPathExtension extends DataExtension
     }
 
 
-    public function calculateLink()
+    /** @return string the link */
+    public function calculateLink(): string
     {
-      //  \error_log('CALCULATING PARENT PATH FOR [' . $this->owner->ID . ']' . $this->owner->Link());
         $parentPath = $this->owner->LinkPath;
         // exit condition
         if (!\is_null($this->owner->ParentID)) {
             if (empty($this->owner->LinkPath)) {
                 $parentPath = $this->owner->Parent()->calculateLink() . '/' . $this->owner->URLSegment;
-                ;
-                \error_log('Parent path: ' . $parentPath . ', LINK=' . $this->owner->Parent()->Link());
                 $this->owner->LinkPath = $parentPath;
-               // error_log('LINK PATH: ' . $this->owner->LinkPath);
             }
         }
 
