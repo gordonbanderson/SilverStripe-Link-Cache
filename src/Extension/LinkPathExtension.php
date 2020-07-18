@@ -31,6 +31,7 @@ class LinkPathExtension extends DataExtension
         \array_pop($splits);
         $path = \implode('/', $splits);
         $this->owner->LinkPath = $path . '/';
+        $this->owner->LinkDepth = \sizeof($splits) - 1;
     }
 
 
