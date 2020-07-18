@@ -8,9 +8,47 @@ class LinkPathExtension extends DataExtension
 {
     private static $db = [
         'LinkPath' => 'Text',
+        'LinkDepth' => 'Int',
     ];
 
     private static $indexes = [
         'LinkPathIndex' => ['LinkPath'],
     ];
+
+    public function onBeforeWrite(): void
+    {
+        parent::onBeforeWrite();
+
+        $link = $this->calculateLink();
+
+        if (\is_null($link)) {
+            return;
+        }
+
+        $splits = \explode('/', $link);
+        \array_pop($splits);
+        $path = \implode('/', $splits);
+        $this->owner->LinkPath = $path;
+    }
+
+
+    public function calculateLink()
+    {
+        \error_log('CALCULATING PARENT PATH FOR [' . $this->owner->ID . ']' . $this->owner->Link());
+        $parentPath = $this->owner->LinkPath;
+        // exit condition
+        if (!\is_null($this->owner->ParentID)) {
+            if (empty($this->owner->LinkPath)) {
+                $parentPath = $this->owner->Parent()->calculateLink() . '/' . $this->owner->URLSegment;
+                ;
+                \error_log('Parent path: ' . $parentPath . ', LINK=' . $this->owner->Parent()->Link());
+                $this->owner->LinkPath = $parentPath;
+               // error_log('LINK PATH: ' . $this->owner->LinkPath);
+            }
+        } else {
+            \error_log('-------------');
+        }
+
+        return $parentPath;
+    }
 }
