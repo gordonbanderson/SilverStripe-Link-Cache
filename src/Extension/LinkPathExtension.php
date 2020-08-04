@@ -4,12 +4,14 @@ namespace Suilven\SilverStripeLinkCache\Extension;
 
 use SilverStripe\ORM\DataExtension;
 
+// phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+
 /**
  * Class LinkPathExtension
  *
  * @package Suilven\SilverStripeLinkCache\Extension
  *
- * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+ *
  * @property string $LinkPath
  * @property int $LinkDepth
  * @property \SilverStripe\CMS\Model\SiteTree $owner
