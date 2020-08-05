@@ -10,13 +10,13 @@ matrix:
             env: 'INSTALLER_VERSION=4.4 PHPUNIT_TEST=1'
         -
             php: 7.2
-            env: 'INSTALLER_VERSION=4.4 PHPUNIT_COVERAGE_TEST=1'
+            env: 'INSTALLER_VERSION=4.4 PHPUNIT_TEST=1'
         -
             php: 7.3
             env: 'INSTALLER_VERSION=4.5 PHPUNIT_TEST=1'
         -
             php: 7.4
-            env: 'INSTALLER_VERSION=4.5.x-dev PHPUNIT_TEST=1'
+            env: 'INSTALLER_VERSION=4.5.x-dev PHPUNIT_COVERAGE_TEST=1'
         -
             php: 7.4
             env: 'INSTALLER_VERSION=4.5.x-dev PHPUNIT_TEST=1 DB=PGSQL'
