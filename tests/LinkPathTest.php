@@ -9,7 +9,7 @@ class LinkPathTest extends SapphireTest
 {
     protected static $fixture_file = 'tests/sitetree.yml';
 
-    public function notestArbitraryPages(): void
+    public function testArbitraryPages(): void
     {
         \error_log('================');
         $ids = [80 => 3, 9 => 2, 2 => 1, 1 => 0];
