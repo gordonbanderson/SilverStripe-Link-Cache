@@ -10,7 +10,7 @@ class RebuildLinkCacheTaskTest extends SapphireTest
 {
     protected static $fixture_file = 'tests/sitetree.yml';
 
-    public function notestRebuildCache(): void
+    public function testRebuildCache(): void
     {
         $links = [];
         $depths = [];
