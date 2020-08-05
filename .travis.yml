@@ -48,6 +48,7 @@ before_script:
     - 'echo ''memory_limit = 1G'' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini'
     - 'if [[ $DUPLICATE_CODE_CHECK ]]; then sudo apt remove -y nodejs && curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh && sudo bash nodesource_setup.sh && sudo apt install -y build-essential nodejs && which npm && npm install jscpd@3.2.1  ;fi'
     - 'cat tests/sitetree.yml'
+    - 'rm tests/sitetree-*.yml'
     - 'find tests'
 script:
     - 'if [[ $PHPUNIT_TEST ]]; then vendor/bin/phpunit tests '''' flush=all; fi'
