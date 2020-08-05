@@ -33,8 +33,10 @@ matrix:
             php: 7.4
             env: 'INSTALLER_VERSION=4.5 PHPSTAN_TEST=1'
 
+addons:
+    - mariadb: '10.0'
+
 services:
-    - mysql
     - postgresql
 
 before_install:
