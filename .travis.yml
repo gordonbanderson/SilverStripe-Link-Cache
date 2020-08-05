@@ -56,13 +56,15 @@ before_script:
     - 'cat tests/sitetree.yml'
     - 'rm tests/sitetree-*.yml'
     - 'find tests'
-    - 'vendor/bin/sake dev/build flush=all'
     - echo 'SS_BASE_URL="http://localhost"' > .env
     - echo 'SS_DATABASE_CLASS="MySQLPDODatabase"' >> .env
     - echo 'SS_DATABASE_NAME="travis_ci_test"' >> .env
     - echo 'SS_DATABASE_USERNAME="root"' >> .env
     - echo 'SS_DATABASE_PASSWORD=""' >> .env
     - echo 'SS_DATABASE_SERVER="localhost"' >> .env
+    - cat .env
+    - 'vendor/bin/sake dev/build flush=all'
+
 
 script:
     - 'if [[ $PHPUNIT_TEST ]]; then vendor/bin/phpunit tests '''' flush=all; fi'
