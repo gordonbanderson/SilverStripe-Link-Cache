@@ -10,8 +10,6 @@ use SilverStripe\ORM\DataExtension;
  * Class LinkPathExtension
  *
  * @package Suilven\SilverStripeLinkCache\Extension
- *
- *
  * @property string $LinkPath
  * @property int $LinkDepth
  * @property \SilverStripe\CMS\Model\SiteTree $owner
@@ -32,7 +30,7 @@ class LinkPathExtension extends DataExtension
     public function onBeforeWrite(): void
     {
         parent::onBeforeWrite();
-        
+
         // @todo Make this more efficient
         $link = $this->getOwner()->Link();
 

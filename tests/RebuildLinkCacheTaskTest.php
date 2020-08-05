@@ -17,8 +17,6 @@ class RebuildLinkCacheTaskTest extends SapphireTest
         foreach (SiteTree::get() as $page) {
             $links[$page->ID] = $page->LinkPath;
             $depths[$page->ID] = $page->LinkDepth;
-
-
         }
         $task = new RebuildLinkCacheTask();
         $task->run(null);
@@ -27,6 +25,5 @@ class RebuildLinkCacheTaskTest extends SapphireTest
             $this->assertEquals($links[$page->ID], $page->LinkPath);
             $this->assertEquals($depths[$page->ID], $page->LinkDepth);
         }
-
     }
 }
