@@ -50,6 +50,7 @@ before_script:
     - 'cat tests/sitetree.yml'
     - 'rm tests/sitetree-*.yml'
     - 'find tests'
+    - 'vendor/bin/sake dev/build flush=all'
 script:
     - 'if [[ $PHPUNIT_TEST ]]; then vendor/bin/phpunit tests '''' flush=all; fi'
     - 'if [[ $PHPUNIT_COVERAGE_TEST ]]; then phpdbg -qrr vendor/bin/phpunit tests --coverage-clover=coverage.xml '''' flush=all; fi'
