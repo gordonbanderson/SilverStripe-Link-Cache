@@ -6,9 +6,6 @@ cache:
 matrix:
     include:
         -
-            php: 7.4
-            env: 'INSTALLER_VERSION=4.5 PHPCS_TEST=1'
-        -
             php: 7.1
             env: 'INSTALLER_VERSION=4.4 PHPUNIT_TEST=1'
         -
@@ -34,19 +31,8 @@ matrix:
             env: 'INSTALLER_VERSION=4.5 LINT_CHECK=1'
         -
             php: 7.4
-            env: PHPCS_TEST=1
-        -
-            php: 7.4
-            env: DUPLICATE_CODE_CHECK=1
-        -
-            php: 7.4
-            env: LINT_CHECK=1
-        -
-            php: 7.4
-            env: PHPSTAN_TEST=1
-        -
-            php: 7.4
-            env: PSALM_TEST=1
+            env: 'INSTALLER_VERSION=4.5 PHPSTAN_TEST=1'
+
 services:
     - mysql
 install:
