@@ -8,7 +8,7 @@ use Suilven\SilverStripeLinkCache\Task\RebuildLinkCacheTask;
 
 class RebuildLinkCacheTaskTest extends SapphireTest
 {
-   // protected static $fixture_file = 'tests/sitetree.yml';
+    protected static $fixture_file = 'tests/sitetree.yml';
 
     public function testRebuildCache(): void
     {
