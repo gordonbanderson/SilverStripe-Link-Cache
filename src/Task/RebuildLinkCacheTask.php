@@ -10,7 +10,6 @@ use SilverStripe\Dev\BuildTask;
  * Class RebuildLinkCacheTask
  *
  * @package Suilven\SilverStripeLinkCache\Task
- *
  */
 class RebuildLinkCacheTask extends BuildTask
 {
