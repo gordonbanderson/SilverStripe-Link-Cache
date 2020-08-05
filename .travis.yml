@@ -40,7 +40,7 @@ services:
     - postgresql
 
 before_install:
-    - echo "USE mysql;\nUPDATE user SET password='' WHERE user='root';\nFLUSH PRIVILEGES;\n" | sudo mysql -u root
+    - echo "USE mysql;\nALTER USER 'root'@'localhost' IDENTIFIED BY '';\nFLUSH PRIVILEGES;\n" | sudo mysql -u root
 
     # See https://dev.to/nahuelhds/solving-mariadb-errors-on-travis-ci-3p60
     - sudo mysql -e 'CREATE DATABASE IF NOT EXISTS travis_ci_test;'
