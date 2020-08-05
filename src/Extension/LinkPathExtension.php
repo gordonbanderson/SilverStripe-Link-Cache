@@ -32,9 +32,7 @@ class LinkPathExtension extends DataExtension
     public function onBeforeWrite(): void
     {
         parent::onBeforeWrite();
-
-        error_log('CREATING LINK PATH FOR ' . $this->owner->ID);
-
+        
         // @todo Make this more efficient
         $link = $this->getOwner()->Link();
 
