@@ -35,6 +35,12 @@ matrix:
 
 services:
     - mysql
+    - postgresql
+
+before_install:
+    - mysql -e 'CREATE DATABASE IF NOT EXISTS travis_ci_test;'
+    - psql -c 'create database travis_ci_test;' -U postgres
+
 install:
     - 'composer validate'
     - 'composer global require hirak/prestissimo'
@@ -51,6 +57,13 @@ before_script:
     - 'rm tests/sitetree-*.yml'
     - 'find tests'
     - 'vendor/bin/sake dev/build flush=all'
+    - echo 'SS_BASE_URL="http://localhost"' > .env
+    - echo 'SS_DATABASE_CLASS="MySQLPDODatabase"' >> .env
+    - echo 'SS_DATABASE_NAME="travis_ci_test"' >> .env
+    - echo 'SS_DATABASE_USERNAME="root"' >> .env
+    - echo 'SS_DATABASE_PASSWORD=""' >> .env
+    - echo 'SS_DATABASE_SERVER="localhost"' >> .env
+
 script:
     - 'if [[ $PHPUNIT_TEST ]]; then vendor/bin/phpunit tests '''' flush=all; fi'
     - 'if [[ $PHPUNIT_COVERAGE_TEST ]]; then phpdbg -qrr vendor/bin/phpunit tests --coverage-clover=coverage.xml '''' flush=all; fi'
